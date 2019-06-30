@@ -17,20 +17,6 @@ const Switch: React.FC<ISwitchProps> = (props) => {
   const [value, setValue] = useState(props.value);
   const switchEl = useRef<HTMLElement>(null);
 
-  useLayoutEffect(() => {
-    const {activeColor, inactiveColor} = props;
-    if (activeColor && value && switchEl && switchEl.current) {
-      switchEl.current.style.backgroundColor = activeColor;
-    }
-    if (inactiveColor && !value && switchEl && switchEl.current) {
-      switchEl.current.style.backgroundColor = inactiveColor;
-    }
-  }, [props.value])
-
-  useEffect(() => {
-    setValue(props.value);
-  }, [props.value])
-
   const handleSwitchClick = () => {
     const { onChange } = props
     if (onChange) {
@@ -46,6 +32,20 @@ const Switch: React.FC<ISwitchProps> = (props) => {
     [`${prefixClass}-active`]: value,
     [`${prefixClass}-inactive`]: !value
   })
+
+  useLayoutEffect(() => {
+    const {activeColor, inactiveColor} = props;
+    if (activeColor && value && switchEl && switchEl.current) {
+      switchEl.current.style.backgroundColor = activeColor;
+    }
+    if (inactiveColor && !value && switchEl && switchEl.current) {
+      switchEl.current.style.backgroundColor = inactiveColor;
+    }
+  }, [props.value])
+
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value])
 
   return (
     <span
