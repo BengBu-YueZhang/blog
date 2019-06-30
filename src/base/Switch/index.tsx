@@ -15,7 +15,7 @@ export interface ISwitchProps {
 
 const Switch: React.FC<ISwitchProps> = (props) => {
   const [value, setValue] = useState(props.value);
-  const switchEl = useRef<HTMLElement>(null);
+  const switchEl = useRef<HTMLSpanElement>(null);
 
   const handleSwitchClick = () => {
     const { onChange } = props
