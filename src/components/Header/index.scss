@@ -1,11 +1,21 @@
 @import "../../style/var.scss";
 
 .#{$css-prefix}header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
   margin-bottom: 20px;
 
   &-logo {
     font-weight: 900;
+    line-height: 40px;
     font-size: $font-size-large;
     color: var(--textTitle);
+    user-select: none;
+  }
+
+  &-switch {
+    margin-top: 12px;
   }
 }

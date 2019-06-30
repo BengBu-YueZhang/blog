@@ -6,6 +6,8 @@ body {
   margin: 0 auto;
   padding: 42px 21px;
   font-family: 'PingFangSC-Medium', 'Microsoft YaHei', 'Avenir', Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  transition: background 200ms;
 }
 
 body.light {
