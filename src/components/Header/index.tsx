@@ -1,10 +1,14 @@
 import React from 'react';
 import './index.scss';
 
+const prefixClass = 'yy-header';
+
 const Header: React.FC = () => {
+
   return (
-    <header>
-      <h1 className='logo'>123</h1>
+    <header className={`${prefixClass}`}>
+      <h1 className={`${prefixClass}-logo`}>Nirvana</h1>
+      <div></div>
     </header>
   );
 }
