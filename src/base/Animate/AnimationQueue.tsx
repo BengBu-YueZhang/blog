@@ -12,6 +12,8 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
 
   const timer = useRef(0)
 
+  const pointerTemp = useRef(0)
+
   const {
     children,
     animation = true,
@@ -34,17 +36,20 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
 
   const handleAnimationStateChange = (animation: boolean): void => {
     const len = children.length;
-
     const loop = function () {
-      if (!animation && pointer <= 0) {
+      if (!animation && pointerTemp.current <= 0) {
         setPointer(0)
-      } else if (animation && pointer >= len) {
+        pointerTemp.current = 0
+      } else if (animation && pointerTemp.current >= len) {
         setPointer(len)
+        pointerTemp.current = len
       } else {
         setPointer(prevPointer => {
           if (animation) {
+            pointerTemp.current = prevPointer + 1
             return prevPointer + 1
           } else {
+            pointerTemp.current = prevPointer - 1
             return prevPointer - 1
           }
         })
