@@ -9,6 +9,8 @@ export interface IAnimationQueueGroup {
 const AnimationQueueGroup: any = (props: IAnimationQueueGroup) => {
   const [pointer, setPointer] = useState(0)
 
+  const [state, setState] = useState(false)
+
   const {
     children,
     animation = true,
@@ -16,13 +18,13 @@ const AnimationQueueGroup: any = (props: IAnimationQueueGroup) => {
 
   const handleAnimationcEnd = () => {
     const len = children.length;
-    if (!animation && pointer <= 0) {
+    if (!state && pointer <= 0) {
       setPointer(0)
-    } else if (animation && pointer >= len) {
+    } else if (state && pointer >= len) {
       setPointer(len)
     } else {
       setPointer(prevPointer => {
-        if (animation) {
+        if (state) {
           return prevPointer + 1
         } else {
           return prevPointer - 1
@@ -31,9 +33,11 @@ const AnimationQueueGroup: any = (props: IAnimationQueueGroup) => {
     }
   }
 
+  // 为了避免handleAnimationcEnd多次执行第三个分支
   useEffect(() => {
+    setState(animation)
     handleAnimationcEnd()
-  }, [animation])
+  }, [state, animation])
 
   return React.Children.map(children, (child: any, index) => {
     return React.cloneElement(child, {
