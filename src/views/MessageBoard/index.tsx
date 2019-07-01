@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Login: React.FC = () => {
+const MessageBoard: React.FC = () => {
   return (
-    <div>Home</div>
+    <div>MessageBoard</div>
   )
 }
 
-export default Login;
+export default MessageBoard;

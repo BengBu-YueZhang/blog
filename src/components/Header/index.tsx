@@ -38,21 +38,19 @@ const Header: React.FC = () => {
       <h1 className={`${prefixClass}-logo`}>Nirvana</h1>
       <div className={`${prefixClass}-right`}>
         <div>
-          <Router>
-            {
-              navs && navs.map((nav, index) => {
-                return (
-                  <NavLink
-                    key={index}
-                    exact
-                    className={`${prefixClass}-nav-item`}
-                    activeClassName={`${prefixClass}-nav-item-active`}
-                    to={nav.path}
-                  >{nav.name}</NavLink>
-                )
-              })
-            }
-          </Router>
+          {
+            navs && navs.map((nav, index) => {
+              return (
+                <NavLink
+                  key={index}
+                  exact
+                  className={`${prefixClass}-nav-item`}
+                  activeClassName={`${prefixClass}-nav-item-active`}
+                  to={nav.path}
+                >{nav.name}</NavLink>
+              )
+            })
+          }
         </div>
         <div className={`${prefixClass}-switch`}>
           <Switch

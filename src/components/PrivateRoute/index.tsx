@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 export interface IPrivateRoute {
   component: React.ComponentType<any>;
+  path: string;
   [key: string]: any;
 }
 

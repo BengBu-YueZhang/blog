@@ -29,3 +29,8 @@ export const MessageBoard = Loadable({
   loader: () => import('../views/MessageBoard'),
   loading: () => null
 })
+
+export const About = Loadable({
+  loader: () => import('../views/About'),
+  loading: () => null
+})
