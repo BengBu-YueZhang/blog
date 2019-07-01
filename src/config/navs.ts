@@ -14,5 +14,9 @@ export const navs = [
   {
     name: '留言板',
     path: '/message-board'
+  },
+  {
+    name: '关于',
+    path: '/about'
   }
 ]
