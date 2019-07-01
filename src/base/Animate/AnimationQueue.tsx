@@ -2,9 +2,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Animation, { IAnimation } from './Animation';
 
+function noop () {}
+
 export interface IAnimationQueue extends IAnimation {
   interval: number;
-  children: React.ReactNodeArray
+  children: React.ReactNodeArray;
+  onAnimationcEnd: () => any;
 }
 
 const AnimationQueue: any = (props: IAnimationQueue) => {
@@ -19,7 +22,8 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
     animation = true,
     duration = 200,
     interval = 100,
-    timingFunction = 'ease-in-out'
+    timingFunction = 'ease-in-out',
+    onAnimationcEnd = noop
   } = props;
 
   let {
@@ -40,9 +44,11 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
       if (!animation && pointerTemp.current <= 0) {
         setPointer(0)
         pointerTemp.current = 0
+        onAnimationcEnd && onAnimationcEnd()
       } else if (animation && pointerTemp.current >= len) {
         setPointer(len)
         pointerTemp.current = len
+        onAnimationcEnd && onAnimationcEnd()
       } else {
         setPointer(prevPointer => {
           if (animation) {
