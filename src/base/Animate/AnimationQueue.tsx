@@ -35,8 +35,6 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
   const handleAnimationStateChange = (animation: boolean): void => {
     const len = children.length;
 
-    clearTimeout(timer.current)
-
     const loop = function () {
       if (!animation && pointer <= 0) {
         setPointer(0)
@@ -57,8 +55,11 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
   }
 
   useEffect(() => {
-    handleAnimationStateChange(animation)
-  }, [animation, children.length])
+    handleAnimationStateChange(animation);
+    return () => {
+      clearTimeout(timer.current);
+    }
+  }, [animation, children.length]);
 
   return React.Children.map(children, (child: any, index) => {
     return (
