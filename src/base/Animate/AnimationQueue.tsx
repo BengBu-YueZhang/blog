@@ -59,7 +59,7 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
             return prevPointer - 1
           }
         })
-        timer.current = window.setTimeout(loop, 300);
+        timer.current = window.setTimeout(loop, interval);
       }
     }
     loop();
