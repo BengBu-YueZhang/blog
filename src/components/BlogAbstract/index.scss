@@ -1,0 +1,25 @@
+@import "../../style/var.scss";
+
+.#{$css-prefix}blog-abstract {
+  margin-bottom: 50px;
+  cursor: pointer;
+
+  &-title {
+    font-size: 36px;
+    line-height: 50px;
+    font-weight: 700;
+    color: var(--textTitle);
+  }
+
+  &-created {
+    font-size: $font-size-small;
+    color: var(--textNormal);
+    line-height: $line-height-small;
+  }
+
+  &-subtitle {
+    font-size: $font-size-middle;
+    color: var(--textNormal);
+    line-height: $line-height-middle;
+  }
+}
