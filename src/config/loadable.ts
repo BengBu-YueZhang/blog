@@ -1,16 +1,16 @@
 import Loadable from 'react-loadable';
 
-export const HomeComponent = Loadable({
+export const Home = Loadable({
   loader: () => import('../views/Home'),
   loading: () => null
 });
 
-export const BlogComponent = Loadable({
+export const Blog = Loadable({
   loader: () => import('../views/Blog'),
   loading: () => null
 });
 
-export const MusicComponent = Loadable({
+export const Music = Loadable({
   loader: () => import('../views/Music'),
   loading: () => null
 });

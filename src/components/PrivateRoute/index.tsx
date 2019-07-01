@@ -1,8 +1,22 @@
 import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute: React.FC = () => {
+export interface IPrivateRoute {
+  component: React.ComponentType<any>;
+  [key: string]: any;
+}
+
+const PrivateRoute: React.FC<IPrivateRoute> = (props) => {
+  const { component: Component, ...rest } = props;
   return (
-    <div>PrivateRoute</div>
+    <Route
+      {...rest}
+      render={props => {
+        return (
+          <Component {...props}/>
+        )
+      }}
+    />
   )
 }
 
