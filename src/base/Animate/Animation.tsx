@@ -9,8 +9,15 @@ export interface IAnimation {
   children: React.ReactNode;
 }
 
-const Animation = (props: IAnimation) => {
-  const { children, animation, to, from, duration, timingFunction } = props;
+const Animation: any = (props: IAnimation) => {
+  const {
+    children,
+    animation = true,
+    to = {},
+    from = {},
+    duration = 200,
+    timingFunction = 'ease-in-out'
+  } = props;
   const animationMode = animation ? to : from;
   return React.Children.map(children, (child: any) => {
     return React.cloneElement(child, {
@@ -20,14 +27,6 @@ const Animation = (props: IAnimation) => {
       }
     })
   })
-}
-
-Animation.defaultProps = {
-  from: {},
-  to: {},
-  duration: 200,
-  animation: true,
-  timingFunction: 'ease-in-out'
 }
 
 export default Animation;
