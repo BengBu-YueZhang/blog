@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export interface IAnimation {
   from?: object;
@@ -10,15 +10,33 @@ export interface IAnimation {
 }
 
 const Animation: any = (props: IAnimation) => {
+  const [state, setState] = useState(false);
+
   const {
     children,
     animation = true,
-    to = {},
-    from = {},
     duration = 200,
     timingFunction = 'ease-in-out'
   } = props;
-  const animationMode = animation ? to : from;
+
+  let {
+    to = {
+      opacity: 1
+    },
+    from = {
+      opacity: 0
+    }
+  } = props;
+
+  to = { opacity: 1, ...to };
+  from = { opacity: 0, ...from };
+
+  const animationMode = state ? to : from;
+
+  useEffect(() => {
+    setState(animation)
+  }, [animation])
+
   return React.Children.map(children, (child: any) => {
     return React.cloneElement(child, {
       style: {
