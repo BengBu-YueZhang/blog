@@ -14,8 +14,7 @@ const AnimationQueueGroup: any = (props: IAnimationQueueGroup) => {
     animation = true,
   } = props;
 
-  const handleAnimationcEnd = (animation: boolean) => {
-    console.log('handleAnimationcEnd')
+  const handleAnimationcEnd = () => {
     const len = children.length;
     if (!animation && pointer <= 0) {
       setPointer(0)
@@ -33,7 +32,7 @@ const AnimationQueueGroup: any = (props: IAnimationQueueGroup) => {
   }
 
   useEffect(() => {
-    handleAnimationcEnd(animation)
+    handleAnimationcEnd()
   }, [animation])
 
   return React.Children.map(children, (child: any, index) => {
