@@ -1,9 +1,9 @@
-import Animate from './Animate';
-import AnimateQueue from './AnimateQueue';
-import AnimateQueueGroup from './AnimateQueueGroup';
+import Animation from './Animation';
+import AnimationQueue from './AnimationQueue';
+import AnimationQueueGroup from './AnimationQueueGroup';
 
 export default {
-  Animate,
-  AnimateQueue,
-  AnimateQueueGroup
+  Animation,
+  AnimationQueue,
+  AnimationQueueGroup
 }

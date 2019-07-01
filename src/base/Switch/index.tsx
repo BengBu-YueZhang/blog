@@ -14,6 +14,7 @@ export interface ISwitchProps {
 }
 
 const Switch: React.FC<ISwitchProps> = (props) => {
+
   const [value, setValue] = useState(props.value);
   const switchEl = useRef<HTMLSpanElement>(null);
 
