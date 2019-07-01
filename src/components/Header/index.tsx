@@ -3,6 +3,8 @@ import Switch from '../../base/Switch';
 import './index.scss';
 import { addClass, removeClass } from '../../util/class';
 import { setLocalStorage, getLocalStorage } from '../../util/storage';
+import { NavLink, BrowserRouter as Router } from 'react-router-dom'
+import { navs } from '../../config/navs';
 
 const prefixClass = 'yy-header';
 
@@ -34,11 +36,30 @@ const Header: React.FC = () => {
   return (
     <header className={`${prefixClass}`}>
       <h1 className={`${prefixClass}-logo`}>Nirvana</h1>
-      <div className={`${prefixClass}-switch`}>
-        <Switch
-          value={value}
-          onChange={handleSwitchClick}
-        />
+      <div className={`${prefixClass}-right`}>
+        <div>
+          <Router>
+            {
+              navs && navs.map((nav, index) => {
+                return (
+                  <NavLink
+                    key={index}
+                    exact
+                    className={`${prefixClass}-nav-item`}
+                    activeClassName={`${prefixClass}-nav-item-active`}
+                    to={nav.path}
+                  >{nav.name}</NavLink>
+                )
+              })
+            }
+          </Router>
+        </div>
+        <div className={`${prefixClass}-switch`}>
+          <Switch
+            value={value}
+            onChange={handleSwitchClick}
+          />
+        </div>
       </div>
     </header>
   );

@@ -4,18 +4,39 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
+  height: 100px;
   margin-bottom: 20px;
 
   &-logo {
     font-weight: 900;
-    line-height: 40px;
-    font-size: $font-size-large;
+    line-height: 100px;
+    font-size: 40px;
     color: var(--textTitle);
     user-select: none;
   }
 
+  &-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  &-nav-item {
+    display: inline-block;
+    width: 50px;
+    font-size: $font-size-middle;
+    line-height: 100px;
+    text-align: center;
+    margin: 0 20px;
+    text-decoration: none;
+    color: var(--textNormal);
+
+    &-active {
+      color: var(--textTitle);
+    }
+  }
+
   &-switch {
-    margin-top: 12px;
+    margin-left: 20px;
   }
 }
