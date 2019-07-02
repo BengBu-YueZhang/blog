@@ -10,7 +10,7 @@ export interface IAnimation {
 }
 
 const Animation: any = (props: IAnimation) => {
-
+  // visible避免一开始无法执行入场动画
   const [visible, setVisible] = useState(false);
   const [isUnmount, setIsUnmount] = useState(false);
   const timer = useRef(0);
@@ -61,9 +61,6 @@ const Animation: any = (props: IAnimation) => {
 
   useEffect(() => {
     handleUnmount();
-  }, [animation]);
-
-  useEffect(() => {
     handleVisible();
   }, [animation]);
 

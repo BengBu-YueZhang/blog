@@ -11,6 +11,8 @@ export interface IAnimationQueue extends IAnimation {
 }
 
 const AnimationQueue: any = (props: IAnimationQueue) => {
+  // 指针，判断children中哪一个组件执行动画，但是在定时器中
+  // 因为闭包的原因始终使用的旧的pointer，所以使用useRef实时获取pointer
   const [pointer, setPointer] = useState(0)
 
   const timer = useRef(0)
