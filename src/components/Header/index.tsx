@@ -35,7 +35,7 @@ const Header: React.FC = () => {
 
   return (
     <header className={`${prefixClass}`}>
-      <h1 className={`${prefixClass}-logo`}>Nirvana</h1>
+      <h1 className={`${prefixClass}-logo`}>Evangelion</h1>
       <div className={`${prefixClass}-right`}>
         <div>
           {
