@@ -10,8 +10,9 @@ export interface IAnimation {
 }
 
 const Animation: any = (props: IAnimation) => {
+
   const [visible, setVisible] = useState(false);
-  const [unmount, setUnmount] = useState(false);
+  const [isUnmount, setIsUnmount] = useState(false);
   const timer = useRef(0);
 
   const {
@@ -38,33 +39,39 @@ const Animation: any = (props: IAnimation) => {
   const handleUnmount = () => {
     window.clearTimeout(timer.current);
     if (!animation) {
+      // 动画执行完成后，从body中删除dom
       timer.current = window.setTimeout(() => {
-        setUnmount(true);
+        setIsUnmount(true);
       }, duration);
     } else {
-      setUnmount(false);
+      setIsUnmount(false);
     }
   };
 
   const handleVisible = () => {
-    if (unmount) {
-      setTimeout(() => {
+    if (isUnmount) {
+      // 每次插入dom完成后，执行动画入场的效果
+      window.setTimeout(() => {
         setVisible(animation);
-      }, 0);
+      }, 30);
     } else {
       setVisible(animation);
     }
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     handleUnmount();
-  }, [animation])
+  }, [animation]);
 
   useEffect(() => {
     handleVisible();
-  }, [animation])
+  }, [animation]);
 
-  if (unmount) {
+  if (isUnmount) {
+    return null;
+  }
+
+  if (!children) {
     return null;
   }
 
@@ -75,7 +82,7 @@ const Animation: any = (props: IAnimation) => {
         transition: `all ${timingFunction} ${duration}ms`
       }
     })
-  })
+  });
 }
 
 export default Animation;

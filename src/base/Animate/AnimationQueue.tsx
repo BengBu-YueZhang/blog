@@ -14,13 +14,12 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
   const [pointer, setPointer] = useState(0)
 
   const timer = useRef(0)
-
   const pointerTemp = useRef(0)
 
   const {
     children,
     animation = true,
-    duration = 200,
+    duration = 300,
     interval = 100,
     timingFunction = 'ease-in-out',
     onAnimationcEnd = noop
