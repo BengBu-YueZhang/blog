@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 
 export interface IAnimation {
   from?: object;
@@ -10,7 +10,9 @@ export interface IAnimation {
 }
 
 const Animation: any = (props: IAnimation) => {
-  const [state, setState] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [unmount, setUnmount] = useState(false);
+  const timer = useRef(0);
 
   const {
     children,
@@ -31,11 +33,40 @@ const Animation: any = (props: IAnimation) => {
   to = { opacity: 1, ...to };
   from = { opacity: 0, ...from };
 
-  const animationMode = state ? to : from;
+  const animationMode = visible ? to : from;
+
+  const handleUnmount = () => {
+    window.clearTimeout(timer.current);
+    if (!animation) {
+      timer.current = window.setTimeout(() => {
+        setUnmount(true);
+      }, duration);
+    } else {
+      setUnmount(false);
+    }
+  };
+
+  const handleVisible = () => {
+    if (unmount) {
+      setTimeout(() => {
+        setVisible(animation);
+      }, 0);
+    } else {
+      setVisible(animation);
+    }
+  }
+
+  useLayoutEffect(() => {
+    handleUnmount();
+  }, [animation])
 
   useEffect(() => {
-    setState(animation)
+    handleVisible();
   }, [animation])
+
+  if (unmount) {
+    return null;
+  }
 
   return React.Children.map(children, (child: any) => {
     return React.cloneElement(child, {
