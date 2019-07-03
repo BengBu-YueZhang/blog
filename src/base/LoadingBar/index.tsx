@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useImperativeHandle } from 'react';
 import './index.scss';
 import classnames from 'classnames';
+import ReactDOM from 'react-dom';
 
 const prefixClass = 'yy-loading-bar';
 
@@ -27,6 +28,9 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
     [`${prefixClass}-inner-finish`]: status === LoadingBarStatus.FINISH
   })
 
+  const loadingBarInnerStyles = {
+  }
+
   useImperativeHandle(ref, () => ({
     start: () => {
     },
@@ -38,13 +42,44 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
 
   return (
     <div className={`${prefixClass}`}>
-      <div style={{height: `${height}px`}} className={loadingBarInnerClasses}></div>
+      <div
+        style={{ height: `${height}px` }}
+        className={loadingBarInnerClasses}
+      />
     </div>
-  )
-}
+  );
+};
 
 LoadingBar.defaultProps = {
   height: 2
 }
 
-export default React.forwardRef(LoadingBar);
+const LoadingBarComponent = React.forwardRef(LoadingBar);
+
+let instance;
+
+function newInstance() {
+  const loadingBarRef = React.createRef<any>();
+
+  const div = document.createElement('div');
+  document.body.appendChild(div);
+  ReactDOM.render(<LoadingBarComponent ref={loadingBarRef} />, div);
+
+  const destroy = () => {
+    ReactDOM.unmountComponentAtNode(div);
+    (div.parentNode as HTMLElement ).removeChild(div);
+  }
+
+  const { error, finish, start } = loadingBarRef.current;
+
+  return {
+    destroy,
+    error,
+    finish,
+    start
+  };
+}
+
+export default {
+  newInstance
+};

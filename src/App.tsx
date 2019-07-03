@@ -7,10 +7,8 @@ import { Home, Blog, Music, Login, Detail, MessageBoard, About } from './config/
 import PrivateRoute from './components/PrivateRoute';
 
 const App: React.FC = () => {
-  const LoadingBarEl = useRef();
   return (
     <div className="App">
-      <LoadingBar ref={LoadingBarEl} />
       <Router>
         <div>
           <Header/>
