@@ -42,7 +42,11 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
   }
 
   const reset = () => {
+    clertTime();
+    setPercent(0);
+    setStatus(LoadingBarStatus.SUCCESS);
   };
+
   const start = () => {
     if (timer) {
       return
@@ -55,9 +59,17 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
       setPercent(percentTemp.current);
     }, 200)
   };
+
   const finish = () => {
+    clertTime();
+    setPercent(100);
+    setStatus(LoadingBarStatus.SUCCESS);
   };
+
   const error = () => {
+    clertTime();
+    setPercent(100);
+    setStatus(LoadingBarStatus.ERROR);
   };
 
   useImperativeHandle(ref, () => ({
@@ -92,13 +104,14 @@ function newInstance() {
     (div.parentNode as HTMLElement ).removeChild(div);
   }
 
-  const { error, finish, start } = loadingBarRef.current;
+  const { error, finish, start, reset } = loadingBarRef.current;
 
   return {
     destroy,
     error,
     finish,
-    start
+    start,
+    reset
   };
 }
 
