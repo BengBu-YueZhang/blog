@@ -1,36 +1,40 @@
 import Loadable from 'react-loadable';
 
+function loading() {
+  return null;
+}
+
 export const Home = Loadable({
   loader: () => import('../views/Home'),
-  loading: () => null
+  loading
 });
 
 export const Blog = Loadable({
   loader: () => import('../views/Blog'),
-  loading: () => null
+  loading
 });
 
 export const Music = Loadable({
   loader: () => import('../views/Music'),
-  loading: () => null
+  loading
 });
 
 export const Login = Loadable({
   loader: () => import('../views/Login'),
-  loading: () => null
+  loading
 })
 
 export const Detail = Loadable({
   loader: () => import('../views/Detail'),
-  loading: () => null
+  loading
 })
 
 export const MessageBoard = Loadable({
   loader: () => import('../views/MessageBoard'),
-  loading: () => null
+  loading
 })
 
 export const About = Loadable({
   loader: () => import('../views/About'),
-  loading: () => null
+  loading
 })

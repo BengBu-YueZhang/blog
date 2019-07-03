@@ -1,6 +1,7 @@
 import React from 'react';
 import BlogAbstract from '../../components/BlogAbstract';
 import Animate from '../../base/Animate';
+import useLoadedEnd from '../../base/useLoadedEnd';
 
 const AnimationQueue = Animate.AnimationQueue
 
@@ -13,6 +14,9 @@ const fromStyle = {
 }
 
 const Blog: React.FC = () => {
+
+  useLoadedEnd();
+
   return (
     <section>
       <AnimationQueue to={toStyle} from={fromStyle} duration={600} interval={300}>
