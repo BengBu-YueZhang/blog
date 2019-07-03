@@ -11,6 +11,7 @@ export interface IAnimation {
 
 const Animation: any = (props: IAnimation) => {
   // visible避免一开始无法执行入场动画
+  // 如果animation初始为true, 则无法展示入场动画的效果
   const [visible, setVisible] = useState(false);
   const [isUnmount, setIsUnmount] = useState(false);
   const timer = useRef(0);
@@ -31,6 +32,7 @@ const Animation: any = (props: IAnimation) => {
     }
   } = props;
 
+  // 默认是有一个渐隐渐现的动画
   to = { opacity: 1, ...to };
   from = { opacity: 0, ...from };
 
@@ -64,6 +66,7 @@ const Animation: any = (props: IAnimation) => {
     handleVisible();
   }, [animation]);
 
+  // 不在渲染
   if (isUnmount) {
     return null;
   }

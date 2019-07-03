@@ -1,4 +1,3 @@
-// Thank https://github.com/soWhiteSoColl/dodo-ui/blob/master/src/animate-queue/index.tsx
 import React, { useEffect, useState } from 'react';
 
 export interface IAnimationQueueGroup {
@@ -8,8 +7,8 @@ export interface IAnimationQueueGroup {
 
 const AnimationQueueGroup: any = (props: IAnimationQueueGroup) => {
   const [pointer, setPointer] = useState(0)
-
-  const [state, setState] = useState(false)
+  // 使用visible避免AnimationQueue中的handleAnimationStateChange的影响
+  const [visible, setVisible] = useState(false);
 
   const {
     children,
@@ -18,26 +17,26 @@ const AnimationQueueGroup: any = (props: IAnimationQueueGroup) => {
 
   const handleAnimationcEnd = () => {
     const len = children.length;
-    if (!state && pointer <= 0) {
-      setPointer(0)
-    } else if (state && pointer >= len) {
-      setPointer(len)
+    if (!visible && pointer <= 0) {
+      setPointer(0);
+    } else if (visible && pointer >= len) {
+      setPointer(len);
     } else {
       setPointer(prevPointer => {
-        if (state) {
-          return prevPointer + 1
+        if (visible) {
+          return prevPointer + 1;
         } else {
-          return prevPointer - 1
+          return prevPointer - 1;
         }
-      })
+      });
     }
   }
 
   // 为了避免handleAnimationcEnd多次执行第三个分支
   useEffect(() => {
-    setState(animation)
-    handleAnimationcEnd()
-  }, [state, animation])
+    setVisible(animation);
+    handleAnimationcEnd();
+  }, [visible, animation]);
 
   return React.Children.map(children, (child: any, index) => {
     return React.cloneElement(child, {
