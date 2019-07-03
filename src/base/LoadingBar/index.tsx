@@ -10,55 +10,58 @@ export interface ILoadingBarProps {
 }
 
 export enum LoadingBarStatus {
-  UNSTART = 'unstart',
-  START = 'start',
-  ERROR = 'error',
-  FINISH = 'finish'
+  SUCCESS = 'success',
+  ERROR = 'error'
 }
 
 const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
-  const { height } = props;
-  const [status, setStatus] = useState(LoadingBarStatus.UNSTART);
+  const { height = 2 } = props;
+  const [status, setStatus] = useState(LoadingBarStatus.SUCCESS);
+  const [width, setWidth] = useState(100);
 
   const loadingBarInnerClasses = classnames({
     [`${prefixClass}-inner`]: true,
-    [`${prefixClass}-inner-unstart`]: status === LoadingBarStatus.UNSTART,
-    [`${prefixClass}-inner-start`]: status === LoadingBarStatus.START,
-    [`${prefixClass}-inner-error`]: status === LoadingBarStatus.ERROR,
-    [`${prefixClass}-inner-finish`]: status === LoadingBarStatus.FINISH
-  })
+    [`${prefixClass}-inner-success`]: status === LoadingBarStatus.SUCCESS,
+    [`${prefixClass}-inner-error`]: status === LoadingBarStatus.ERROR
+  });
 
   const loadingBarInnerStyles = {
-  }
+    width: `${width}%`,
+    height: `${height}px`
+  };
+
+  const reset = () => {
+  };
+  const start = () => {
+  };
+  const finish = () => {
+  };
+  const error = () => {
+  };
 
   useImperativeHandle(ref, () => ({
-    start: () => {
-    },
-    finish: () => {
-    },
-    error: () => {
-    }
+    reset,
+    start,
+    finish,
+    error
   }));
 
   return (
     <div className={`${prefixClass}`}>
       <div
-        style={{ height: `${height}px` }}
+        style={loadingBarInnerStyles}
         className={loadingBarInnerClasses}
       />
     </div>
   );
 };
 
-LoadingBar.defaultProps = {
-  height: 2
-}
-
 const LoadingBarComponent = React.forwardRef(LoadingBar);
 
-let instance;
-
 function newInstance() {
+
+  console.log('执行')
+
   const loadingBarRef = React.createRef<any>();
 
   const div = document.createElement('div');
@@ -80,6 +83,6 @@ function newInstance() {
   };
 }
 
-export default {
-  newInstance
-};
+const instance = newInstance();
+
+export default instance;

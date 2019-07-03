@@ -1,10 +1,6 @@
 body {
   width: 100%;
-  max-width: 720px;
-  min-height: 100vh;
   box-sizing: border-box;
-  margin: 0 auto;
-  padding: 42px 21px;
   font-family: 'PingFangSC-Medium', 'Microsoft YaHei', 'Avenir', Helvetica, Arial, sans-serif;
   background-color: var(--bg);
   transition: background 200ms;
@@ -13,11 +9,23 @@ body {
 body.light {
   --bg: #fff;
   --textNormal: rgba(0,0,0,.87);
-  --textTitle: #6990f6;
+  --textTitle: #42a5f5;
+  --loadingBarSuccessBg: #42a5f5;
+  --loadingBarErrorBg: #ef5350;
 }
 
 body.dark {
   --bg: #303030;
   --textNormal: #fff;
   --textTitle: rgba(255, 255, 255, 0.7);
+  --loadingBarSuccessBg: #fff;
+  --loadingBarErrorBg: #rgba(255, 255, 255, 0.7);
+}
+
+
+#root {
+  max-width: 720px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 42px 21px;
 }
