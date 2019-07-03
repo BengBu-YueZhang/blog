@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 
 const prefixClass = 'yy-loading-bar';
 
+let timer!: number | null;
+
 export interface ILoadingBarProps {
   height?: number | string;
 }
@@ -17,7 +19,9 @@ export enum LoadingBarStatus {
 const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
   const { height = 2 } = props;
   const [status, setStatus] = useState(LoadingBarStatus.SUCCESS);
-  const [width, setWidth] = useState(100);
+  const [percent, setPercent] = useState(0);
+  // 使用percentTemp是避免定时器产生的闭包的问题
+  const percentTemp = useRef(0);
 
   const loadingBarInnerClasses = classnames({
     [`${prefixClass}-inner`]: true,
@@ -26,13 +30,30 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
   });
 
   const loadingBarInnerStyles = {
-    width: `${width}%`,
+    width: `${percent}%`,
     height: `${height}px`
   };
+
+  const clertTime = () => {
+    if (timer) {
+      window.clearInterval(timer);
+      timer = null;
+    }
+  }
 
   const reset = () => {
   };
   const start = () => {
+    if (timer) {
+      return
+    }
+    timer = window.setInterval(() => {
+      percentTemp.current += Math.floor(Math.random() * 3 + 1)
+      if (percentTemp.current >= 90) {
+        clertTime()
+      }
+      setPercent(percentTemp.current);
+    }, 200)
   };
   const finish = () => {
   };
@@ -59,8 +80,6 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
 const LoadingBarComponent = React.forwardRef(LoadingBar);
 
 function newInstance() {
-
-  console.log('执行')
 
   const loadingBarRef = React.createRef<any>();
 
