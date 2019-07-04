@@ -3,6 +3,10 @@ import './index.scss';
 
 function noop() {}
 
+// function isWindow(target: Element | Window ): boolean {
+//   return (<Window>target).pageYOffset !== undefined;
+// }
+
 const prefixClass = 'yy-back-top';
 
 export interface IBackTop {
@@ -22,12 +26,24 @@ const BackTop: React.FC<IBackTop> = (props) => {
   }
 
   useEffect(() => {
-    const onScroll = (event: Event) => {
-      console.log(event.scrollTop)
+    const onScroll = () => {
+      let currentScrollTop = 0;
+      if (target !== undefined) {
+        if (target instanceof Window) {
+          currentScrollTop = target.pageYOffset;
+        } else if (target instanceof Element) {
+          currentScrollTop = target.scrollTop;
+        }
+      }
+      if (visibilityHeight !== undefined && currentScrollTop >= visibilityHeight) {
+        setVisible(true);
+      } else if (visibilityHeight !== undefined && currentScrollTop < visibilityHeight) {
+        setVisible(false);
+      }
     };
-    window.addEventListener('scroll', onScroll);
+    (target as Element | Window).addEventListener('scroll', onScroll);
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      (target as Element | Window).removeEventListener('scroll', onScroll);
     }
   }, [])
 
