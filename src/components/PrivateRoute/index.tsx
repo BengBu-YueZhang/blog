@@ -11,8 +11,12 @@ export interface IPrivateRoute {
 
 const PrivateRoute: React.FC<IPrivateRoute> = (props) => {
   const { component: Component, auth, ...rest } = props;
-  console.log('开始')
-  LoadingBar.start();
+  const { location: { pathname } } = props;
+  if (window.location.pathname !== pathname) {
+    LoadingBar.start();
+  }
+  if (auth) {
+  }
   return (
     <Route
       {...rest}
