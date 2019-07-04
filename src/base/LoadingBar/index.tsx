@@ -58,7 +58,7 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
     setTimeout(() => {
       setPercent(0);
       setStatus(LoadingBarStatus.SUCCESS);
-    }, 30)
+    }, 210)
   };
 
   const start = () => {
@@ -66,6 +66,8 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
       return
     }
     show();
+    setPercent(0);
+    setStatus(LoadingBarStatus.SUCCESS);
     timer = window.setInterval(() => {
       percentTemp.current += Math.floor(Math.random() * 3 + 1)
       if (percentTemp.current >= 90) {
@@ -82,7 +84,7 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
     setPercent(100);
     setTimeout(() => {
       reset();
-    }, 2000);
+    }, 1000);
   };
 
   const error = () => {
@@ -92,7 +94,7 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
     setPercent(100);
     setTimeout(() => {
       reset();
-    }, 2000);
+    }, 1000);
   };
 
   useImperativeHandle(ref, () => ({

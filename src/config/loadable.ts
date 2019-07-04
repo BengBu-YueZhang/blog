@@ -1,6 +1,11 @@
 import Loadable from 'react-loadable';
+import LoadingBar from '../base/LoadingBar';
 
-function loading() {
+function loading(props: any) {
+  if (props.error) {
+    LoadingBar.error();
+    return null
+  }
   return null;
 }
 

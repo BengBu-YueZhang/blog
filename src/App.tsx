@@ -13,14 +13,14 @@ const App: React.FC = () => {
         <div>
           <Header/>
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/blog" component={Blog}/>
-            <Route exact path="/music" component={Music}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/detail/:id" component={Detail}/>
-            <Route exact path="/about" component={About}/>
+            <PrivateRoute exact path="/" component={Home}/>
+            <PrivateRoute exact path="/blog" component={Blog}/>
+            <PrivateRoute exact path="/music" component={Music}/>
+            <PrivateRoute exact path="/login" component={Login}/>
+            <PrivateRoute exact path="/detail/:id" component={Detail}/>
+            <PrivateRoute exact path="/about" component={About}/>
             {/* 留言板需要添加登录权限 */}
-            <Route exact path="/message-board" component={MessageBoard}/>
+            <PrivateRoute exact path="/message-board" component={MessageBoard}/>
           </Switch>
         </div>
       </Router>
