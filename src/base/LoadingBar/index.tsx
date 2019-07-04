@@ -20,6 +20,8 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
   const { height = 2 } = props;
   const [status, setStatus] = useState(LoadingBarStatus.SUCCESS);
   const [percent, setPercent] = useState(0);
+  const [visible, setVisible] = useState(0);
+
   // 使用percentTemp是避免定时器产生的闭包的问题
   const percentTemp = useRef(0);
 
@@ -31,7 +33,8 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
 
   const loadingBarInnerStyles = {
     width: `${percent}%`,
-    height: `${height}px`
+    height: `${height}px`,
+    opacity: visible
   };
 
   const clertTime = () => {
@@ -41,16 +44,28 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
     }
   }
 
+  const hide = () => {
+    setVisible(0);
+  }
+
+  const show = () => {
+    setVisible(1);
+  }
+
   const reset = () => {
     clertTime();
-    setPercent(0);
-    setStatus(LoadingBarStatus.SUCCESS);
+    hide()
+    setTimeout(() => {
+      setPercent(0);
+      setStatus(LoadingBarStatus.SUCCESS);
+    }, 30)
   };
 
   const start = () => {
     if (timer) {
       return
     }
+    show();
     timer = window.setInterval(() => {
       percentTemp.current += Math.floor(Math.random() * 3 + 1)
       if (percentTemp.current >= 90) {
@@ -62,14 +77,22 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
 
   const finish = () => {
     clertTime();
-    setPercent(100);
+    show();
     setStatus(LoadingBarStatus.SUCCESS);
+    setPercent(100);
+    setTimeout(() => {
+      reset();
+    }, 2000);
   };
 
   const error = () => {
     clertTime();
-    setPercent(100);
+    show();
     setStatus(LoadingBarStatus.ERROR);
+    setPercent(100);
+    setTimeout(() => {
+      reset();
+    }, 2000);
   };
 
   useImperativeHandle(ref, () => ({

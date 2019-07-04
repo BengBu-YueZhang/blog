@@ -9,7 +9,7 @@
   background-color: var(--bg);
 
   &-inner {
-    transition: width $transition linear;
+    transition: width $transition linear, opacity $transition linear;
     &-success {
       background-color: var(--loadingBarSuccessBg);
     }
