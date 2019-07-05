@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './index.scss';
+import Animate from '../Animate';
 
 function noop() {}
 
 const prefixClass = 'yy-back-top';
+
+const Animation = Animate.Animation;
 
 export interface IBackTop {
   target?: Element | Window;
@@ -14,6 +17,9 @@ export interface IBackTop {
 const BackTop: React.FC<IBackTop> = (props) => {
   const [visible, setVisible] = useState(false);
   const { target, visibilityHeight, onClick } = props;
+
+  const backTopStyles = {
+  }
 
   const getScrollTop = (): number => {
     let currentScrollTop = 0;
@@ -68,15 +74,11 @@ const BackTop: React.FC<IBackTop> = (props) => {
   }, [])
 
   return (
-    <React.Fragment>
-      {
-        visible && (
-          <div className={`${prefixClass}`} onClick={handleClick}>
-            <span></span>
-          </div>
-        )
-      }
-    </React.Fragment>
+    <Animation animation={visible} duration={100}>
+      <div className={`${prefixClass}`} style={backTopStyles} onClick={handleClick}>
+        <span></span>
+      </div>
+    </Animation>
   )
 }
 
