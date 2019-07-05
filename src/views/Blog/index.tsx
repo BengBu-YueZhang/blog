@@ -19,12 +19,33 @@ const Blog: React.FC = () => {
 
   return (
     <section>
-      <AnimationQueue to={toStyle} from={fromStyle} duration={600} interval={300}>
+      <AnimationQueue to={toStyle} from={fromStyle} duration={400} interval={200}>
         <div>
           <BlogAbstract/>
         </div>
         <div>
           <BlogAbstract/>
+        </div>
+        <div>
+          <BlogAbstract />
+        </div>
+        <div>
+          <BlogAbstract />
+        </div>
+        <div>
+          <BlogAbstract />
+        </div>
+        <div>
+          <BlogAbstract />
+        </div>
+        <div>
+          <BlogAbstract />
+        </div>
+        <div>
+          <BlogAbstract />
+        </div>
+        <div>
+          <BlogAbstract />
         </div>
       </AnimationQueue>
     </section>

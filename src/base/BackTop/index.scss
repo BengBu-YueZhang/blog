@@ -1,0 +1,10 @@
+@import "../../style/var.scss";
+
+.#{$css-prefix}back-top {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  background-color: var(--textTitle);
+  width: 60px;
+  height: 60px;
+}
