@@ -10,7 +10,7 @@ export interface IRipple {
   duration?: number;
 }
 
-const Ripple: React.FC<IRipple> = (props, ref) => {
+const RippleComponent: React.FC<IRipple> = (props, ref) => {
   const rippleRef = useRef<HTMLDivElement>(null);
   const { color = 'rgba(0, 0, 0, 0.2)', duration = 400 } = props;
 
@@ -78,5 +78,7 @@ const Ripple: React.FC<IRipple> = (props, ref) => {
     <div ref={rippleRef} className={`${prefixClass}-group`}></div>
   )
 }
+
+const Ripple = React.forwardRef(RippleComponent);
 
 export default Ripple;
