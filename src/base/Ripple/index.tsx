@@ -21,7 +21,7 @@ const Ripple: React.FC<IRipple> = (props, ref) => {
       const x = event.clientX - left;
       const y = event.clientY - top;
       const ripple = document.createElementNS(xmlns, 'svg');
-      ripple.setAttribute('class', 'ripple');
+      ripple.setAttribute('class', prefixClass);
       // 画一个圆
       const circle = document.createElementNS(xmlns, 'circle')
       circle.setAttribute('cx', x + '');
