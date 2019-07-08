@@ -4,6 +4,14 @@ import Animate from '../Animate';
 
 function noop() {}
 
+const toStyle = {
+  transform: `translateX(0)`
+}
+
+const fromStyle = {
+  transform: `translateY(100%)`
+}
+
 const prefixClass = 'yy-back-top';
 
 const Animation = Animate.Animation;
@@ -74,7 +82,7 @@ const BackTop: React.FC<IBackTop> = (props) => {
   }, [])
 
   return (
-    <Animation animation={visible} duration={100}>
+    <Animation animation={visible} duration={150} to={toStyle} from={fromStyle}>
       <div className={`${prefixClass}`} style={backTopStyles} onClick={handleClick}>
         <span></span>
       </div>

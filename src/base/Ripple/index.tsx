@@ -29,6 +29,7 @@ const RippleComponent: React.FC<IRipple> = (props, ref) => {
       circle.setAttribute('r', 0 + '');
       circle.setAttribute('fill', color);
       // 画扩散动画
+      // TODO: 使用any是因为始终提示我，没有beginElement方法
       const expandAnimate: any = document.createElementNS(xmlns, 'animate');
       expandAnimate.setAttribute('attributeName', 'r');
       expandAnimate.setAttribute('dur', `${duration}ms`);
