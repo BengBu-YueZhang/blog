@@ -5,16 +5,23 @@ import { addClass, removeClass } from '../../util/class';
 import { setLocalStorage, getLocalStorage } from '../../util/storage';
 import { NavLink, BrowserRouter as Router } from 'react-router-dom'
 import { navs } from '../../config/navs';
+import { withRouter } from 'react-router'
+import { RouteComponentProps } from 'react-router'
 
 const prefixClass = 'yy-header';
 
-const Header: React.FC = () => {
+const Header: React.FC<RouteComponentProps> = (props) => {
   const theme = getLocalStorage('theme')
   const body = document.getElementsByTagName('body')[0];
   const [value, setValue] = useState(theme === 'light' ? false : true);
 
   const handleSwitchClick = (checked: boolean): void => {
     setValue(checked)
+  }
+
+  const handleClickLogo = (): void => {
+    const { history } = props;
+    history.push('/');
   }
 
   const handleSwitchToggle = (): void => {
@@ -35,7 +42,7 @@ const Header: React.FC = () => {
 
   return (
     <header className={`${prefixClass}`}>
-      <h1 className={`${prefixClass}-logo`}>Evangelion</h1>
+      <h1 className={`${prefixClass}-logo`} onClick={handleClickLogo}>Evangelion</h1>
       <div className={`${prefixClass}-right`}>
         <div>
           {
@@ -63,4 +70,4 @@ const Header: React.FC = () => {
   );
 }
 
-export default Header;
+export default withRouter(Header);
