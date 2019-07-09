@@ -24,6 +24,7 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
 
   // 使用percentTemp是避免定时器产生的闭包的问题
   const percentTemp = useRef(0);
+  const isEnd = useRef(false);
 
   const loadingBarInnerClasses = classnames({
     [`${prefixClass}-inner`]: true,
@@ -55,21 +56,24 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
   const reset = () => {
     clertTime();
     hide()
-    setTimeout(() => {
-      setPercent(0);
-      setStatus(LoadingBarStatus.SUCCESS);
-    }, 210)
+    window.setTimeout(() => {
+      if (isEnd) {
+        setPercent(0);
+        setStatus(LoadingBarStatus.SUCCESS);
+      }
+    }, 220)
   };
 
   const start = () => {
+    clertTime();
     if (timer) {
       return
     }
-    show();
-    setPercent(0);
+    isEnd.current = false;
     setStatus(LoadingBarStatus.SUCCESS);
+    show();
     timer = window.setInterval(() => {
-      percentTemp.current += Math.floor(Math.random() * 3 + 1)
+      percentTemp.current += Math.floor(Math.random() * 8 + 1)
       if (percentTemp.current >= 90) {
         clertTime()
       }
@@ -79,22 +83,28 @@ const LoadingBar: React.FC<ILoadingBarProps> = (props, ref) => {
 
   const finish = () => {
     clertTime();
+    isEnd.current = true;
     show();
     setStatus(LoadingBarStatus.SUCCESS);
     setPercent(100);
-    setTimeout(() => {
-      reset();
-    }, 1000);
+    window.setTimeout(() => {
+      if (isEnd) {
+        reset();
+      }
+    }, 500);
   };
 
   const error = () => {
     clertTime();
+    isEnd.current = true;
     show();
     setStatus(LoadingBarStatus.ERROR);
     setPercent(100);
-    setTimeout(() => {
-      reset();
-    }, 1000);
+    window.setTimeout(() => {
+      if (isEnd) {
+        reset();
+      }
+    }, 500);
   };
 
   useImperativeHandle(ref, () => ({
