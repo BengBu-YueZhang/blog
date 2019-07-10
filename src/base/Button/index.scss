@@ -1,0 +1,24 @@
+@import "../../style/var.scss";
+
+.#{$css-prefix}button {
+  display: inline-block;
+  position: relative;
+  user-select: none;
+  outline: none;
+  background-color: var(--textTitle);
+  border: none;
+  height: 36px;
+  min-width: 88px;
+  padding: 0;
+  border-radius: 2px;
+  padding: 0 16px;
+  cursor: pointer;
+  &-text {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: $font-size-middle;
+    line-height: 36px;
+    color: var(--bg);
+  }
+}

@@ -12,9 +12,11 @@ export interface IRipple {
 
 const RippleComponent: React.FC<IRipple> = (props, ref) => {
   const rippleRef = useRef<HTMLDivElement>(null);
+  // 默认值
   const { color = 'rgba(0, 0, 0, 0.2)', duration = 400 } = props;
 
   const createdRipple = (event: MouseEvent) => {
+    // 事件触发的元素
     const target = event.currentTarget;
     if (target !== null) {
       const { top, left, width } = (target as HTMLElement).getBoundingClientRect();
