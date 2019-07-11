@@ -26,9 +26,10 @@ export default function withRipple(element: React.ReactElement) {
     }
 
     render() {
+      const { className = '' } = Element.props;
 
       return React.cloneElement(Element, {
-        className: `${Element.props.className} ${prefixClass}`,
+        className: `${className} ${prefixClass}`,
         onMouseDown: this.handleMouseDown,
         children: (
           <React.Fragment>
