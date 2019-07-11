@@ -6,6 +6,10 @@ import WithRipple from '../../base/WithRipple';
 
 const Home: React.FC = () => {
 
+  const TestElement = WithRipple((
+    <div>123</div>
+  ))
+
   useLoadedEnd();
 
   return (
@@ -18,6 +22,7 @@ const Home: React.FC = () => {
       <Button>测试</Button>
       <hr/>
       <Button>测试测试测试测试测试测试</Button>
+      <TestElement/>
     </div>
   );
 }
