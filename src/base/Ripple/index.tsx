@@ -5,12 +5,16 @@ const prefixClass = 'yy-ripple';
 
 const xmlns = 'http://www.w3.org/2000/svg';
 
-export interface IRipple {
+export interface IRippleProps {
   color?: string;
   duration?: number;
 }
 
-const RippleComponent: React.FC<IRipple> = (props, ref) => {
+export interface IRippleState {
+  createdRipple: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+const RippleComponent: React.FC<IRippleProps> = (props, ref) => {
   const rippleRef = useRef<HTMLDivElement>(null);
   // 默认值
   const { color = 'rgba(0, 0, 0, 0.2)', duration = 400 } = props;

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import Ripple, { IRipple } from '../Ripple';
+import Ripple, { IRippleState } from '../Ripple';
 
 const prefixClass = 'yy-button';
 
@@ -13,12 +13,12 @@ export enum ButtonType {
 export interface IButton {
   disabled?: false;
   type?: 'primary';
-  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const Button: React.FC<IButton> = (props) => {
   const { children, onClick } = props;
-  const rippleRef = useRef<any>(null);
+  const rippleRef = useRef<IRippleState>();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (onClick) {
@@ -28,7 +28,7 @@ const Button: React.FC<IButton> = (props) => {
 
   const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (rippleRef && rippleRef.current !== null) {
-      rippleRef.current.createdRipple(event);
+      (rippleRef.current as IRippleState).createdRipple(event);
     }
   }
 

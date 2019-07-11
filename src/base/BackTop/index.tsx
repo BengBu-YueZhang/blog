@@ -19,7 +19,7 @@ const Animation = Animate.Animation;
 export interface IBackTop {
   target?: Element | Window;
   visibilityHeight?: number;
-  onClick?: () => any;
+  onClick?: () => void;
 }
 
 const BackTop: React.FC<IBackTop> = (props) => {

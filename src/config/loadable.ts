@@ -1,7 +1,7 @@
 import Loadable from 'react-loadable';
 import LoadingBar from '../base/LoadingBar';
 
-function loading(props: any) {
+function loading(props: Loadable.LoadingComponentProps) {
   if (props.error) {
     LoadingBar.error();
     return null

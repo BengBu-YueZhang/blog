@@ -11,6 +11,13 @@ export interface ILoadingBarProps {
   height?: number | string;
 }
 
+export interface ILoadingBarState {
+  error: () => void;
+  finish: () => void;
+  start: () => void;
+  reset: () => void;
+}
+
 export enum LoadingBarStatus {
   SUCCESS = 'success',
   ERROR = 'error'
@@ -116,7 +123,7 @@ const LoadingBarComponent = React.forwardRef(LoadingBar);
 
 function newInstance() {
 
-  const loadingBarRef = React.createRef<any>();
+  const loadingBarRef = React.createRef<ILoadingBarState>();
 
   const div = document.createElement('div');
   document.body.appendChild(div);
@@ -124,10 +131,10 @@ function newInstance() {
 
   const destroy = () => {
     ReactDOM.unmountComponentAtNode(div);
-    (div.parentNode as HTMLElement ).removeChild(div);
+    (div.parentNode as HTMLDivElement ).removeChild(div);
   }
 
-  const { error, finish, start, reset } = loadingBarRef.current;
+  const { error, finish, start, reset } = loadingBarRef.current as ILoadingBarState;
 
   return {
     destroy,
