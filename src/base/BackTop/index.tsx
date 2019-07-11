@@ -17,7 +17,7 @@ const prefixClass = 'yy-back-top';
 const Animation = Animate.Animation;
 
 export interface IBackTop {
-  target?: Element | Window;
+  target?: HTMLElement | Window;
   visibilityHeight?: number;
   onClick?: () => void;
 }
@@ -34,7 +34,7 @@ const BackTop: React.FC<IBackTop> = (props) => {
     if (target !== undefined) {
       if (target instanceof Window) {
         currentScrollTop = target.pageYOffset;
-      } else if (target instanceof Element) {
+      } else if (target instanceof HTMLElement) {
         currentScrollTop = target.scrollTop;
       }
     }
@@ -58,9 +58,9 @@ const BackTop: React.FC<IBackTop> = (props) => {
       const distance = position - currentScrollTop;
       currentScrollTop = currentScrollTop + distance / 5;
       if (Math.abs(distance) < 1) {
-        (target as Element | Window).scrollTo(0, position);
+        (target as HTMLElement | Window).scrollTo(0, position);
       } else {
-        (target as Element | Window).scrollTo(0, currentScrollTop);
+        (target as HTMLElement | Window).scrollTo(0, currentScrollTop);
         requestAnimationFrame(step);
       }
     };
@@ -75,9 +75,9 @@ const BackTop: React.FC<IBackTop> = (props) => {
   }
 
   useEffect(() => {
-    (target as Element | Window).addEventListener('scroll', onScroll);
+    (target as HTMLElement | Window).addEventListener('scroll', onScroll);
     return () => {
-      (target as Element | Window).removeEventListener('scroll', onScroll);
+      (target as HTMLElement | Window).removeEventListener('scroll', onScroll);
     }
   }, [])
 
