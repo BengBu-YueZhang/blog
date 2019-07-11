@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import useLoadedEnd from '../../base/useLoadedEnd';
 import LoadingBar from '../../base/LoadingBar';
 import Button from '../../base/Button';
 
 const Home: React.FC = () => {
 
-  useLoadedEnd();
+  useLoadedEnd();  
 
   return (
     <div>

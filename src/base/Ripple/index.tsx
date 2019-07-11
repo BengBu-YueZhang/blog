@@ -11,7 +11,7 @@ export interface IRippleProps {
 }
 
 export interface IRippleState {
-  createdRipple: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  createdRipple: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 const RippleComponent: React.FC<IRippleProps> = (props, ref) => {
@@ -19,7 +19,7 @@ const RippleComponent: React.FC<IRippleProps> = (props, ref) => {
   // 默认值
   const { color = 'rgba(0, 0, 0, 0.2)', duration = 400 } = props;
 
-  const createdRipple = (event: MouseEvent) => {
+  const createdRipple = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     // 事件触发的元素
     const target = event.currentTarget;
     if (target !== null) {
