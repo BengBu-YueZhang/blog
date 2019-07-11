@@ -1,47 +1,51 @@
 import { useEffect } from 'react';
 
-let isFirstEnter = false;
-
-const defaultConfig = {
-  appear: false
-}
-
-type observerConfig = {
-  appear: boolean
-}
+let isCallOnEnter = false;
+let isCallOnLeave = false;
+let isFirstCall = false;
 
 function useObserverViewPortScroll<T extends Element>(
   eleRef: React.RefObject<T>,
   onEnter?: () => any,
-  onLeave?: () => any,
-  config?: observerConfig
+  onLeave?: () => any
 ) {
   
   let intersectionObserver!: IntersectionObserver;
 
-  config = {...defaultConfig, ...config};
-
-  isFirstEnter = config.appear;
-
   const handleScroll = () => {
+    const offsetTop = (eleRef.current as T).getBoundingClientRect().top;
+    const viewPortHeight = window.innerHeight;
+    const targetHeigth = (eleRef.current as T).getBoundingClientRect().height;
+    if (offsetTop < viewPortHeight && offsetTop > -targetHeigth) {
+      if (!isFirstCall || (isCallOnLeave && !isCallOnEnter)) {
+        onEnter && onEnter();
+        isCallOnEnter = true;
+        isCallOnLeave = false;
+      }
+    } else {
+      if (!isFirstCall || (isCallOnEnter && !isCallOnLeave)) {
+        onLeave && onLeave();
+        isCallOnLeave = true;
+        isCallOnEnter = false;
+      }
+    }
+    isFirstCall = true;
   }
 
   const observer = () => {
     if (IntersectionObserver) {
       intersectionObserver = new IntersectionObserver(function (entries) {
-        if (entries[0].intersectionRatio <= 0 && isFirstEnter) {
+        if (entries[0].intersectionRatio <= 0) {
           onLeave && onLeave();
         }
         if (entries[0].intersectionRatio > 0) {
-          if (!isFirstEnter) {
-            isFirstEnter = true;
-          }
           onEnter && onEnter();
         }
       })
       intersectionObserver.observe(eleRef.current as T);
     } else {
-
+      handleScroll();
+      window.addEventListener('scroll', handleScroll);
     }
   }
 
@@ -49,6 +53,7 @@ function useObserverViewPortScroll<T extends Element>(
     if (IntersectionObserver) {
       intersectionObserver.unobserve(eleRef.current as T);
     } else {
+      window.removeEventListener('scroll', handleScroll);
     }
   }
 
