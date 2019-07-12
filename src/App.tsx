@@ -1,12 +1,13 @@
 import React, { useRef } from 'react';
 import './App.css';
 import Header from './components/Header';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Home, Blog, Music, Login, Detail, MessageBoard, About } from './config/loadable';
 import PrivateRoute from './components/PrivateRoute';
 import BackTop from './base/BackTop';
 
 const App: React.FC = () => {
+
   return (
     <div className="App">
       <BackTop/>
