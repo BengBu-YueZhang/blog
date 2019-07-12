@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import useLoadedEnd from '../../base/useLoadedEnd';
 import useObserverViewPortScroll from '../../base/useObserverViewPortScroll';
+import Adsorption from '../../base/Adsorption';
 
 const Music: React.FC = () => {
 
@@ -60,7 +61,9 @@ const Music: React.FC = () => {
       <hr/>
       <div>22</div>
       <hr/>
-      <div ref={ele}>HelloWorld</div>
+      <Adsorption>
+        <div ref={ele}>HelloWorld</div>
+      </Adsorption>
       <hr/>
       <div>23</div>
       <hr/>
@@ -110,6 +113,52 @@ const Music: React.FC = () => {
       <hr/>
       <div>46</div>
       <hr/>
+      <div>47</div>
+      <hr />
+      <div>48</div>
+      <hr />
+      <div>49</div>
+      <hr />
+      <div>50</div>
+      <hr />
+      <div>51</div>
+      <hr/>
+      <div>52</div>
+      <hr/>
+      <div>53</div>
+      <hr />
+      <div>54</div>
+      <hr />
+      <div>55</div>
+      <hr />
+      <div>56</div>
+      <hr />
+      <div>57</div>
+      <hr />
+      <div>58</div>
+      <hr />
+      <div>59</div>
+      <hr />
+      <div>60</div>
+      <hr />
+      <div>61</div>
+      <hr />
+      <div>62</div>
+      <hr />
+      <div>63</div>
+      <hr />
+      <div>64</div>
+      <hr />
+      <div>65</div>
+      <hr />
+      <div>66</div>
+      <hr />
+      <div>67</div>
+      <hr />
+      <div>68</div>
+      <hr />
+      <div>69</div>
+      <hr />
     </div>
   )
 }
