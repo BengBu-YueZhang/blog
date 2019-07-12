@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 let isCallOnEnter = false;
 let isCallOnLeave = false;
@@ -13,10 +13,10 @@ function useObserverViewPortScroll<T extends Element>(
   let intersectionObserver!: IntersectionObserver;
 
   const handleScroll = () => {
-    const offsetTop = (eleRef.current as T).getBoundingClientRect().top;
+    const targetTop = (eleRef.current as T).getBoundingClientRect().top;
     const viewPortHeight = window.innerHeight;
     const targetHeigth = (eleRef.current as T).getBoundingClientRect().height;
-    if (offsetTop < viewPortHeight && offsetTop > -targetHeigth) {
+    if (targetTop < viewPortHeight && targetTop > -targetHeigth) {
       if (!isFirstCall || (isCallOnLeave && !isCallOnEnter)) {
         onEnter && onEnter();
         isCallOnEnter = true;
