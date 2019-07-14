@@ -10,7 +10,7 @@ const toStyle = {
 }
 
 const fromStyle = {
-  transform: `translateX(40%)`
+  transform: `translateX(30%)`
 }
 
 const Blog: React.FC = () => {
@@ -19,7 +19,7 @@ const Blog: React.FC = () => {
 
   return (
     <section>
-      <AnimationQueue to={toStyle} from={fromStyle} duration={400} interval={150}>
+      <AnimationQueue to={toStyle} from={fromStyle} duration={600} interval={200}>
         <div>
           <BlogAbstract/>
         </div>

@@ -1,0 +1,110 @@
+@import "../../style/var.scss";
+
+.#{$css-prefix}input {
+  position: relative;
+  width: 320px;
+  box-sizing: border-box;
+
+  &-icon-wrap {
+    padding-left: 46px;
+  }
+
+  &-label-wrap {
+    padding-top: 20px; 
+  }
+
+  &-full-wrap {
+    width: 100%;
+  }
+
+  &-error-text-wrap {
+    padding-bottom: 12px;
+  }
+
+  &-icon-font {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    top: 50%;
+    left: 10px;
+    color: var(--textSubtitleTitle);
+  }
+
+  &-label {
+    position: absolute;
+    left: 0;
+    transition: $transition;
+
+    &-focus {
+      top: -20px;
+      color: var(--textTitle);
+      font-size: $font-size-small;
+      height: 20px;
+      line-height: 20px;
+    }
+
+    &-blur {
+      top: 0;
+      height: 32px;
+      line-height: 32px;
+      color: var(--textSubtitleTitle);
+      font-size: $font-size-middle;
+    }
+
+    &-error {
+      color: var(--loadingBarErrorBg);
+    }
+
+    &-exist-content {
+      top: -20px;
+      color: var(--textSubtitleTitle);
+      font-size: $font-size-small;
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+
+  &-text-field-wrap {
+    position: relative;
+  }
+  
+  &-text-field {
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    font-size: $font-size-middle;
+    outline: none;
+    border: none;
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+    &-full {
+      width: 100%;
+    }
+
+    &-disabled {
+      cursor: none;
+    }
+
+    &-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--textTitle);
+      transform-origin: center center;
+      transition: $transition;
+
+      &-blur {
+        transform: scaleX(0);
+      }
+
+      &-focus {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
