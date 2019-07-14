@@ -15,8 +15,18 @@ const Login: React.FC = () => {
     <div className={`${prefixClass}`}>
       <Waves/>
       <div className={`${prefixClass}-login`}>
-        <Button full={true}>登录</Button>
-        <Button full={true}>注册</Button>
+        <div className={`${prefixClass}-block`}>
+          <Input full={true}/>
+        </div>
+        <div className={`${prefixClass}-block`}>
+          <Input full={true}/>
+        </div>
+        <div className={`${prefixClass}-block`}>
+          <Button full={true}>登录</Button>
+        </div>
+        <div className={`${prefixClass}-block`}>
+          <Button full={true}>注册</Button>
+        </div>
       </div>
     </div>
   )
