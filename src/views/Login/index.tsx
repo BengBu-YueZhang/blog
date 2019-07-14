@@ -36,16 +36,30 @@ const Login: React.FC = () => {
             <div className={`${prefixClass}-block`}>
               <Input label={'密码'} full={true} icon={'iconlock'} />
             </div>
-            <div className={`${prefixClass}-block`}>
-              <Button full={true}>登录</Button>
-            </div>
-            <div className={`${prefixClass}-block`}>
-              <Button full={true} onClick={handleRegisterClick}>注册</Button>
+            <div className={`${prefixClass}-buttons`}>
+              <div className={`${prefixClass}-block`}>
+                <Button full={true}>登录</Button>
+              </div>
+              <div className={`${prefixClass}-block`}>
+                <Button full={true} onClick={handleRegisterClick}>注册</Button>
+              </div>
             </div>
           </div>
         </Animation>
         <Animation animation={isShowRegister}>
           <div>
+            <div className={`${prefixClass}-block`}>
+              <Input label={'用户名'} full={true} icon={'iconuser'} />
+            </div>
+            <div className={`${prefixClass}-block`}>
+              <Input label={'密码'} full={true} icon={'iconlock'} />
+            </div>
+            <div className={`${prefixClass}-block`}>
+              <Input label={'再次输入密码'} full={true} icon={'iconlock'} />
+            </div>
+            <div className={`${prefixClass}-block`}>
+              <Button full={true} onClick={handleBackClick}>注册</Button>
+            </div>
             <div className={`${prefixClass}-block`}>
               <Button full={true} onClick={handleBackClick}>返回</Button>
             </div>
