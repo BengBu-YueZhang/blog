@@ -13,6 +13,11 @@
   border-radius: 2px;
   padding: 0 16px;
   cursor: pointer;
+
+  &-full {
+    width: 100%;
+  }
+
   &-text {
     display: block;
     width: 100%;

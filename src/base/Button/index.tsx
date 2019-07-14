@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import './index.scss';
 import Ripple, { IRippleState } from '../Ripple';
 
@@ -12,12 +12,13 @@ export enum ButtonType {
 
 export interface IButton {
   disabled?: false;
-  type?: 'primary';
+  type?: ButtonType;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  full?: boolean;
 }
 
 const Button: React.FC<IButton> = (props) => {
-  const { children, onClick } = props;
+  const { children, onClick, full } = props;
   const rippleRef = useRef<IRippleState>();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -32,8 +33,20 @@ const Button: React.FC<IButton> = (props) => {
     }
   }
 
+  const classnames = useMemo(() => {
+    if (full) {
+      return `${prefixClass} ${prefixClass}-full`;
+    } else {
+      return `${prefixClass}`;
+    }
+  }, [full])
+
   return (
-    <button className={`${prefixClass}`} onClick={handleClick} onMouseDown={handleMouseDown}>
+    <button
+      className={classnames}
+      onClick={handleClick}
+      onMouseDown={handleMouseDown}
+    >
       <span className={`${prefixClass}-text`}>{ children }</span>
       <Ripple ref={rippleRef}/>
     </button>
@@ -43,7 +56,8 @@ const Button: React.FC<IButton> = (props) => {
 Button.defaultProps = {
   disabled: false,
   type: ButtonType.PRIMARY,
-  onClick: noop
+  onClick: noop,
+  full: false
 }
 
 export default Button;
