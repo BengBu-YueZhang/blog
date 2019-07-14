@@ -3,18 +3,15 @@
 import React, { useEffect } from 'react';
 import './index.scss';
 
-let destruction = false;
-
-const waves = ['rgba(66, 165, 245, 1)', 'rgba(66, 165, 245, 0.4)'];
-
 const prefixClass = "yy-canvas";
-
-let i: number = 0;
 
 const Canvas: React.FC = () => {
 
+  const waves = ['rgba(66, 165, 245, 1)', 'rgba(66, 165, 245, 0.4)'];
+  let destruction: boolean = false;
   let canvas!: HTMLCanvasElement;
   let ctx!: CanvasRenderingContext2D;
+  let i: number = 0;
 
   const initCanvas = () => {
     canvas = document.getElementById('canvas') as HTMLCanvasElement;

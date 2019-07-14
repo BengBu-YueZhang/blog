@@ -12,6 +12,7 @@ const Login: React.FC = () => {
   return (
     <div className={`${prefixClass}`}>
       <Waves/>
+      <div className={`${prefixClass}-login`}></div>
     </div>
   )
 }
