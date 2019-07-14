@@ -18,5 +18,9 @@ export const navs = [
   {
     name: '关于',
     path: '/about'
+  },
+  {
+    name: '登录',
+    path: '/login'
   }
 ]

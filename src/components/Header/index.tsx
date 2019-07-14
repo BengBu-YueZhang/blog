@@ -40,34 +40,40 @@ const Header: React.FC<RouteComponentProps> = (props) => {
     handleSwitchToggle()
   }, [value])
 
-  return (
-    <header className={`${prefixClass}`}>
-      <h1 className={`${prefixClass}-logo`} onClick={handleClickLogo}>Evangelion</h1>
-      <div className={`${prefixClass}-right`}>
-        <div>
-          {
-            navs && navs.map((nav, index) => {
-              return (
-                <NavLink
-                  key={index}
-                  exact
-                  className={`${prefixClass}-nav-item`}
-                  activeClassName={`${prefixClass}-nav-item-active`}
-                  to={nav.path}
-                >{nav.name}</NavLink>
-              )
-            })
-          }
+  const { location: { pathname } } = props
+
+  if (pathname === '/login') {
+    return null;
+  } else {
+    return (
+      <header className={`${prefixClass}`}>
+        <h1 className={`${prefixClass}-logo`} onClick={handleClickLogo}>Evangelion</h1>
+        <div className={`${prefixClass}-right`}>
+          <div>
+            {
+              navs && navs.map((nav, index) => {
+                return (
+                  <NavLink
+                    key={index}
+                    exact
+                    className={`${prefixClass}-nav-item`}
+                    activeClassName={`${prefixClass}-nav-item-active`}
+                    to={nav.path}
+                  >{nav.name}</NavLink>
+                )
+              })
+            }
+          </div>
+          <div className={`${prefixClass}-switch`}>
+            <Switch
+              value={value}
+              onChange={handleSwitchClick}
+            />
+          </div>
         </div>
-        <div className={`${prefixClass}-switch`}>
-          <Switch
-            value={value}
-            onChange={handleSwitchClick}
-          />
-        </div>
-      </div>
-    </header>
-  );
+      </header>
+    );
+  }
 }
 
 export default withRouter(Header);
