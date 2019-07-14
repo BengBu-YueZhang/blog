@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 
 function useObserverBorderScroll<T extends Element>(
   eleRef: React.RefObject<T>,
-  onEnterTop?: () => any,
-  onLeaveTop?: () => any,
-  onEnterBottom?: () => any,
-  onLeaveBottom?: () => any
+  onScroll?: (distance: number) => any | undefined,
+  onEnterTop?: () => any | undefined,
+  onLeaveTop?: () => any | undefined,
+  onEnterBottom?: () => any | undefined,
+  onLeaveBottom?: () => any | undefined
 ) {
 
   const handleScroll = () => {
     const targetTop = (eleRef.current as T).getBoundingClientRect().top;
     const targetHeigth = (eleRef.current as T).getBoundingClientRect().height;
     const viewPortHeight = window.innerHeight;
+    onScroll && onScroll(window.pageYOffset);
     if (targetTop <= 0) {
       onEnterTop && onEnterTop();
     }

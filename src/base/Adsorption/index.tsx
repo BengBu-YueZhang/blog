@@ -1,5 +1,5 @@
 import React, { useRef, useState, useMemo } from 'react';
-import useObserverBorderScroll from '../../base/useObserverBorderScroll';
+import useObserverBorderScroll from '../useObserverBorderScroll';
 import './index.scss';
 
 enum Position {
@@ -43,7 +43,7 @@ const Adsorption: React.FC<IAdsorption> = (props) => {
     setIsFixed(false);
   }
 
-  useObserverBorderScroll(ele, onEnterTop, onLeaveTop)
+  useObserverBorderScroll(ele, undefined, onEnterTop, onLeaveTop)
 
   return (
     <div ref={ele}>

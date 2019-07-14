@@ -84,7 +84,7 @@ const BackTop: React.FC<IBackTop> = (props) => {
   return (
     <Animation animation={visible} duration={150} to={toStyle} from={fromStyle}>
       <div className={`${prefixClass}`} style={backTopStyles} onClick={handleClick}>
-        <span></span>
+        <span className="iconfont iconshangjiantou"></span>
       </div>
     </Animation>
   )

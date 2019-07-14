@@ -10,6 +10,7 @@ body.light {
   --bg: #fff;
   --textNormal: rgba(0,0,0,.87);
   --textTitle: #42a5f5;
+  --textSubtitleTitle: rgba(0,0,0,.54);
   --loadingBarSuccessBg: #42a5f5;
   --loadingBarErrorBg: #ef5350;
 }
@@ -18,6 +19,7 @@ body.dark {
   --bg: #303030;
   --textNormal: #fff;
   --textTitle: rgba(255, 255, 255, 0.7);
+  --textSubtitleTitle: rgba(255, 255, 255, 0.7);
   --loadingBarSuccessBg: #fff;
   --loadingBarErrorBg: #ef5350;
 }

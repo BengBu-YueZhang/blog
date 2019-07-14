@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import './App.css';
+import './icon/iconfont.css';
 import Header from './components/Header';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Home, Blog, Music, Login, Detail, MessageBoard, About } from './config/loadable';
