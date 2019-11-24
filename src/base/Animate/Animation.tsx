@@ -10,8 +10,6 @@ export interface IAnimation {
 }
 
 const Animation: any = (props: IAnimation) => {
-  // visible避免一开始无法执行入场动画
-  // 如果animation初始为true, 则无法展示入场动画的效果
   const [visible, setVisible] = useState(false);
   const [isUnmount, setIsUnmount] = useState(false);
   const timer = useRef(0);
@@ -32,7 +30,6 @@ const Animation: any = (props: IAnimation) => {
     }
   } = props;
 
-  // 默认是有一个渐隐渐现的动画
   to = { opacity: 1, ...to };
   from = { opacity: 0, ...from };
 
@@ -41,7 +38,6 @@ const Animation: any = (props: IAnimation) => {
   const handleUnmount = () => {
     window.clearTimeout(timer.current);
     if (!animation) {
-      // 动画执行完成后，从body中删除dom
       timer.current = window.setTimeout(() => {
         setIsUnmount(true);
       }, duration);
@@ -52,12 +48,11 @@ const Animation: any = (props: IAnimation) => {
 
   const handleVisible = () => {
     if (isUnmount) {
-      // 每次插入dom完成后，执行动画入场的效果
+      setVisible(animation);
+    } else {
       window.setTimeout(() => {
         setVisible(animation);
       }, 30);
-    } else {
-      setVisible(animation);
     }
   }
 
