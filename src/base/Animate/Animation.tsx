@@ -9,6 +9,7 @@ export interface IAnimation {
   children: React.ReactNode;
 }
 
+// TODO:关闭后是否保留DOM的配置
 const Animation: any = (props: IAnimation) => {
   
   const {
