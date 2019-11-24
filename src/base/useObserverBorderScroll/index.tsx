@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+// TODO:兼容非window的情况
 function useObserverBorderScroll<T extends Element>(
   eleRef: React.RefObject<T>,
   onScroll?: (distance: number) => any | undefined,
@@ -41,7 +42,7 @@ function useObserverBorderScroll<T extends Element>(
     return () => {
       unobserver();
     }
-  })
+  }, [])
 }
 
 export default useObserverBorderScroll;

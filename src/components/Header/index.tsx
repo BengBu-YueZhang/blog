@@ -47,7 +47,7 @@ const Header: React.FC<RouteComponentProps> = (props) => {
   } else {
     return (
       <header className={`${prefixClass}`}>
-        <h1 className={`${prefixClass}-logo`} onClick={handleClickLogo}>Evangelion</h1>
+        <h1 className={`${prefixClass}-logo`} onClick={handleClickLogo}>Yue·Blog</h1>
         <div className={`${prefixClass}-right`}>
           <div>
             {

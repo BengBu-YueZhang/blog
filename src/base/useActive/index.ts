@@ -5,27 +5,26 @@ const defaultEvents = [
   'mousedown',
   'resize',
   'keydown',
-  'touchstart',
-  'wheel',
   'scroll'
 ]
 
 function useActive (
-  delay: number = 30000,
-  initState: boolean = false,
+  delay: number = 3000,
+  initState: boolean = true,
   events: string[] = defaultEvents
 ) {
   const [state, setState] = useState(initState);
   const timer = useRef(0);
+  const realState = useRef(state);
+
+  realState.current = state
 
   const handleEvents = () => {
-    if (!state) {
-      setState(true)
-    }
+    if (!realState.current) setState(true)
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => {
       setState(false);
-    }, delay)
+    }, delay);
   };
 
   const handleVisibilitychange = () => {
@@ -34,18 +33,14 @@ function useActive (
 
   const observer = () => {
     for (let i = 0; i < events.length; i++) {
-      if (events[i] in window) {
-        window.addEventListener(events[i], handleEvents);
-      }
+      window.addEventListener(events[i], handleEvents);
     }
     window.addEventListener('visibilitychange', handleVisibilitychange);
   };
 
   const unobserver = () => {
     for (let i = 0; i < events.length; i++) {
-      if (events[i] in window) {
-        window.removeEventListener(events[i], handleEvents);
-      }
+      window.removeEventListener(events[i], handleEvents);
     }
     window.removeEventListener('visibilitychange', handleVisibilitychange);
   };

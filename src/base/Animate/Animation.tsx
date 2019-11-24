@@ -22,7 +22,7 @@ const Animation: any = (props: IAnimation) => {
   const [visible, setVisible] = useState({
     animation: false,
     unmount: !animation
-  })
+  });
 
   let {
     to = {

@@ -4,6 +4,7 @@ let isCallOnEnter = false;
 let isCallOnLeave = false;
 let isFirstCall = false;
 
+// TODO:兼容非window的情况
 function useObserverViewPortScroll<T extends Element>(
   eleRef: React.RefObject<T>,
   onEnter?: () => any,
