@@ -11,6 +11,10 @@
   line-height: 50px;
   padding-top: 5px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   .iconfont {
     font-size: 28px;
     color: #fff;
