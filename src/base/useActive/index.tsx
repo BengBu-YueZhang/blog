@@ -9,7 +9,7 @@ const defaultEvents = [
 ]
 
 function useActive (
-  delay: number = 3000,
+  delay: number = 20000,
   initState: boolean = true,
   events: string[] = defaultEvents
 ) {

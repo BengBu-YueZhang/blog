@@ -6,8 +6,11 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Home, Blog, Music, Login, Detail, MessageBoard, About } from './config/loadable';
 import PrivateRoute from './components/PrivateRoute';
 import BackTop from './base/BackTop';
+import useChangeTitle from './components/useChangeTitle';
 
 const App: React.FC = () => {
+
+  useChangeTitle();
 
   return (
     <div className="App">
