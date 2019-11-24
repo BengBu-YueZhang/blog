@@ -9,14 +9,10 @@ export interface IAnimationQueue extends IAnimation {
   onAnimationcEnd: () => any;
 }
 
-/**
- * 目前存在的问题
- * - 列表内删减的时候，没有动画效果，这个可能要参考一些React开源动画库的源码
- */
+// TODO:列表内删减的时候，没有动画效果
+// TODO:列表插入只能从后插入，不能做到从任意位置插入的动画
+// 这个可能要参考一些React开源动画库的源码
 const AnimationQueue: any = (props: IAnimationQueue) => {
-  // 指针，判断children中哪一个组件执行动画，但是在定时器中
-  // 因为闭包的原因始终使用的旧的pointer，所以使用useRef实时获取pointer
-  // 但是useRef的update不会触发render，所以state和ref一起使用
   const [pointer, setPointer] = useState(0)
 
   const timer = useRef(0)
@@ -73,7 +69,6 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
   useEffect(() => {
     handleAnimationStateChange(animation);
     return () => {
-      // 停止之前的定时器，开始新的动画
       clearTimeout(timer.current);
     }
   }, [animation, children.length]);
@@ -86,7 +81,9 @@ const AnimationQueue: any = (props: IAnimationQueue) => {
         from={from}
         duration={duration}
         timingFunction={timingFunction}
-      >{ child }</Animation>
+      >
+        { child }
+      </Animation>
     )
   })
 }
