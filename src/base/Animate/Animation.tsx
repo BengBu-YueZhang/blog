@@ -81,6 +81,7 @@ const Animation: any = (props: IAnimation) => {
   return React.Children.map(children, (child: any) => {
     return React.cloneElement(child, {
       style: {
+        ...child.props.style,
         ...animationMode,
         transition: `all ${timingFunction} ${duration}ms`
       }

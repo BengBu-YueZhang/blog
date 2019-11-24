@@ -9,16 +9,16 @@ const prefixClass = 'yy-drawer';
 const Animation = Animate.Animation
 
 export interface IDrawe {
-  mask: boolean
-  maskClosable: boolean
-  visible: boolean
-  width: number
-  height: number
-  placement: 'top' | 'right' | 'bottom' | 'left'
-  onClose: () => void
-  children: React.ReactChild
-  closable: boolean
-  getContainer: HTMLElement
+  mask?: boolean
+  maskClosable?: boolean
+  visible?: boolean
+  width?: number
+  height?: number
+  placement?: 'top' | 'right' | 'bottom' | 'left'
+  onClose?: () => void
+  children?: React.ReactChild
+  closable?: boolean
+  getContainer?: HTMLElement
 }
 
 const Drawer: React.FC<IDrawe> = (props) => {
@@ -46,13 +46,26 @@ const Drawer: React.FC<IDrawe> = (props) => {
     [`${prefixClass}-left`]: placement === 'left'
   })
 
+  const drawerContentClasses = classnames({
+    [`${prefixClass}-content`]: true
+  })
+
+  const drawerContentStyle = placement === 'right' || placement === 'left' ?
+    {
+      width: `${width}px`
+    }
+    :
+    {
+      height: `${height}px`
+    };
+
   return (
     <div className={drawerClasses} style={{ zIndex }}>
-      <Animation>
+      <Animation animation={visible}>
         <div className={`${prefixClass}-mask`}></div>
       </Animation>
-      <Animation>
-        <div className={`${prefixClass}-content`}>
+      <Animation animation={visible}>
+        <div style={drawerContentStyle} className={drawerContentClasses}>
           {
             children
           }
