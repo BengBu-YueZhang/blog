@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
 import useActive from '../../base/useActive';
 import useTitle from '../../base/useTitle';
+import useIco from '../useIco';
 
 function useChangeTitle () {
-  const initTitle = document.getElementsByTagName('title')[0].innerHTML;
   const { state } = useActive();
-  const { setTitle } = useTitle(initTitle);
+  const { setTitle } = useTitle(document.getElementsByTagName('title')[0].innerHTML);
+  const { setICO }  = useIco('popsicle.ico')
 
   useEffect(() => {
     if (state) {
-      setTitle('张越的部落格')
+      setTitle('张越的部落格');
+      setICO('popsicle.ico');
     } else {
-      setTitle('◔ ‸◔？')
+      setTitle('◔ ‸◔？');
+      setICO('sushi.ico');
     }
   }, [state])
 }
