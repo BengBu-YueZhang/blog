@@ -10,16 +10,19 @@ export interface IAnimation {
 }
 
 const Animation: any = (props: IAnimation) => {
-  const [visible, setVisible] = useState(false);
-  const [isUnmount, setIsUnmount] = useState(false);
-  const timer = useRef(0);
-
+  
   const {
     children,
     animation = true,
     duration = 200,
     timingFunction = 'ease-in-out'
   } = props;
+
+  const timer = useRef(0);
+  const [visible, setVisible] = useState({
+    animation: false,
+    unmount: !animation
+  })
 
   let {
     to = {
@@ -33,36 +36,40 @@ const Animation: any = (props: IAnimation) => {
   to = { opacity: 1, ...to };
   from = { opacity: 0, ...from };
 
-  const animationMode = visible ? to : from;
-
-  const handleUnmount = () => {
-    window.clearTimeout(timer.current);
-    if (!animation) {
-      timer.current = window.setTimeout(() => {
-        setIsUnmount(true);
-      }, duration);
-    } else {
-      setIsUnmount(false);
-    }
-  };
+  const animationMode = visible.animation ? to : from;
 
   const handleVisible = () => {
-    if (isUnmount) {
-      setVisible(animation);
-    } else {
+    window.clearTimeout(timer.current);
+    if (animation) {
+      setVisible({
+        animation: false,
+        unmount: false
+      })
       window.setTimeout(() => {
-        setVisible(animation);
-      }, 30);
+        setVisible({
+          animation: true,
+          unmount: false
+        })
+      }, 30)
+    } else {
+      setVisible({
+        animation: false,
+        unmount: false
+      })
+      timer.current = window.setTimeout(() => {
+        setVisible({
+          animation: false,
+          unmount: true
+        })
+      }, duration);
     }
   }
 
   useEffect(() => {
-    handleUnmount();
     handleVisible();
   }, [animation]);
 
-  // 不在渲染
-  if (isUnmount) {
+  if (visible.unmount) {
     return null;
   }
 
