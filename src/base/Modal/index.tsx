@@ -41,7 +41,10 @@ const Modal: React.FC<IModal> = (props) => {
     onCancel = noop,
     width = 520,
     title = '',
-    footer = [],
+    footer = [
+      <Button type={'primary'}>{okText}</Button>,
+      <Button type={'danger'}>{cancelText}</Button>
+    ],
     children,
     getContainer = document.body
   } = props;
@@ -62,16 +65,22 @@ const Modal: React.FC<IModal> = (props) => {
   const node = (
     <Animation animation={show}>
       <div className={`${prefixClass}`} style={{ zIndex }}>
-        <div className={`${prefixClass}-mask`}></div>
+        <div className={`${prefixClass}-mask`}>
+        </div>
         <div className={`${prefixClass}-content`}>
           { 
-            title && <div className={`${prefixClass}-content-title`}>
-            </div>
+            title &&
+              <div className={`${prefixClass}-content-title`}>
+              </div>
           }
           <div className={`${prefixClass}-content-content`}>
           </div>
-          <div className={`${prefixClass}-content-footer`}>
-          </div>
+          {
+            footer && footer.length > 0 && 
+              <div className={`${prefixClass}-content-footer`}>
+                { footer }
+              </div>
+          }
         </div>
       </div>
     </Animation>
