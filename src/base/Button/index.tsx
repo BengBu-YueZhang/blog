@@ -7,15 +7,9 @@ const prefixClass = 'yy-button';
 
 function noop () {};
 
-export enum ButtonType {
-  PRIMARY = 'primary',
-  DEFAULT = 'default',
-  DANGER = 'danger'
-}
-
 export interface IButton {
   disabled?: false;
-  type?: ButtonType;
+  type?: 'primary' | 'danger';
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   full?: boolean;
 }
@@ -25,7 +19,7 @@ const Button: React.FC<IButton> = (props) => {
     children,
     onClick = noop,
     full = false,
-    type = ButtonType.PRIMARY
+    type = 'primary'
   } = props;
 
   const rippleRef = useRef<IRippleState>();
@@ -43,9 +37,8 @@ const Button: React.FC<IButton> = (props) => {
   const buttonClasses = classnames({
     [`${prefixClass}`]: true,
     [`${prefixClass}-full`]: full,
-    [`${prefixClass}-primary`]: type === ButtonType.PRIMARY,
-    [`${prefixClass}-default`]: type === ButtonType.DEFAULT,
-    [`${prefixClass}-danger`]: type === ButtonType.DANGER
+    [`${prefixClass}-primary`]: type === 'primary',
+    [`${prefixClass}-danger`]: type === 'danger'
   })
 
   return (

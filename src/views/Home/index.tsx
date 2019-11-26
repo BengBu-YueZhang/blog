@@ -28,6 +28,8 @@ const Home: React.FC = () => {
       <button onClick={LoadingBar.reset}>reset</button>
       <hr/>
       <Button>测试</Button>
+      <br/>
+      <Button type={'danger'}>测试2</Button>
       <hr/>
       <Button>测试测试测试测试测试测试</Button>
       <TestElement/>

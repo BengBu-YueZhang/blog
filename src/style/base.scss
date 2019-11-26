@@ -21,9 +21,8 @@ body.dark {
   --textTitle: rgba(255, 255, 255, 0.7);
   --textSubtitleTitle: rgba(255, 255, 255, 0.7);
   --loadingBarSuccessBg: #fff;
-  --loadingBarErrorBg: #ef5350;
+  --loadingBarErrorBg: rgba(124, 70, 70, 0.685);
 }
-
 
 #root {
   max-width: 720px;
