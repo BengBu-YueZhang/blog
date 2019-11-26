@@ -34,7 +34,7 @@ function useObserverViewPortScroll<T extends Element>(
   }
 
   const observer = () => {
-    if (IntersectionObserver) {
+    if ('IntersectionObserver' in window) {
       intersectionObserver = new IntersectionObserver(function (entries) {
         if (entries[0].intersectionRatio <= 0) {
           onLeave && onLeave();

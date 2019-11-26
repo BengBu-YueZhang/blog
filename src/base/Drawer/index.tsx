@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
 import Animate from '../Animate';
 import getZIndex from '../../util/zIndex';
 import classnames from 'classnames';
+import ReactDOM from 'react-dom';
 
 const prefixClass = 'yy-drawer';
 
@@ -26,13 +27,25 @@ const Drawer: React.FC<IDrawe> = (props) => {
     mask = true,
     maskClosable = true,
     visible = false,
-    width = 256,
-    height = 256,
+    width = 300,
+    height = 300,
     placement = 'right',
     children,
     closable = true,
-    getContainer = document.body
+    getContainer = document.body,
+    onClose
   } = props;
+
+  const [show, setShow] = useState(visible);
+
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    setShow(visible);
+  }, [visible])
 
   const zIndex = getZIndex();
 
@@ -50,21 +63,64 @@ const Drawer: React.FC<IDrawe> = (props) => {
     [`${prefixClass}-content`]: true
   })
 
-  const drawerContentStyle = placement === 'right' || placement === 'left' ?
-    {
+  const drawerContentStyle = 
+    placement === 'right' || placement === 'left' ? {
       width: `${width}px`
-    }
-    :
-    {
+    } : {
       height: `${height}px`
     };
+  
+  const drawerContentAnimationToStyle = 
+    placement === 'right' ? {
+      transform: `translateX(0)`
+    } : placement === 'left' ? {
+      transform: `translateX(0)`
+    } : placement === 'bottom' ? {
+      transform: `translateY(0)`
+    } : {
+      transform: `translateY(0)`
+    }
+  
+  const drawerContentAnimationFromStyle = 
+    placement === 'right' ? {
+      transform: `translateX(100%)`,
+      opacity: 1
+    } : placement === 'left' ? {
+      transform: `translateX(-100%)`,
+      opacity: 1
+    } : placement === 'bottom' ? {
+      transform: `translateY(100%)`,
+      opacity: 1
+    } : {
+      transform: `translateY(-100%)`,
+      opacity: 1
+    }
 
-  return (
+  const handleMaskClick = () => {
+    if (maskClosable) {
+      setShow(false);
+      setTimeout(() => {
+        onClose && onClose();
+      }, 230);
+    }
+  }
+
+  const node = (
     <div className={drawerClasses} style={{ zIndex }}>
-      <Animation animation={visible}>
-        <div className={`${prefixClass}-mask`}></div>
-      </Animation>
-      <Animation animation={visible}>
+      {
+        mask && <Animation
+          duration={200}
+          animation={show}
+        >
+          <div className={`${prefixClass}-mask`} onClick={handleMaskClick}></div>
+        </Animation>
+      }
+      <Animation
+        duration={230}
+        animation={show}
+        to={drawerContentAnimationToStyle}
+        from={drawerContentAnimationFromStyle}
+      >
         <div style={drawerContentStyle} className={drawerContentClasses}>
           {
             children
@@ -73,6 +129,15 @@ const Drawer: React.FC<IDrawe> = (props) => {
       </Animation>
     </div>
   )
+
+  if (!getContainer) {
+    return node
+  }
+
+  return ReactDOM.createPortal(
+    node,
+    document.body
+  );
 }
 
 export default Drawer;
