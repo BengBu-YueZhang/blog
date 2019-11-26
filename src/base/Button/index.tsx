@@ -1,13 +1,16 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import './index.scss';
 import Ripple, { IRippleState } from '../Ripple';
+import classnames from 'classnames';
 
 const prefixClass = 'yy-button';
 
 function noop () {};
 
 export enum ButtonType {
-  PRIMARY = 'primary'
+  PRIMARY = 'primary',
+  DEFAULT = 'default',
+  DANGER = 'danger'
 }
 
 export interface IButton {
@@ -18,13 +21,17 @@ export interface IButton {
 }
 
 const Button: React.FC<IButton> = (props) => {
-  const { children, onClick, full } = props;
+  const {
+    children,
+    onClick = noop,
+    full = false,
+    type = ButtonType.PRIMARY
+  } = props;
+
   const rippleRef = useRef<IRippleState>();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (onClick) {
-      onClick(event);
-    }
+    onClick && onClick(event);
   }
 
   const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -33,17 +40,17 @@ const Button: React.FC<IButton> = (props) => {
     }
   }
 
-  const classnames = useMemo(() => {
-    if (full) {
-      return `${prefixClass} ${prefixClass}-full`;
-    } else {
-      return `${prefixClass}`;
-    }
-  }, [full])
+  const buttonClasses = classnames({
+    [`${prefixClass}`]: true,
+    [`${prefixClass}-full`]: full,
+    [`${prefixClass}-primary`]: type === ButtonType.PRIMARY,
+    [`${prefixClass}-default`]: type === ButtonType.DEFAULT,
+    [`${prefixClass}-danger`]: type === ButtonType.DANGER
+  })
 
   return (
     <button
-      className={classnames}
+      className={buttonClasses}
       onClick={handleClick}
       onMouseDown={handleMouseDown}
     >
@@ -51,13 +58,6 @@ const Button: React.FC<IButton> = (props) => {
       <Ripple ref={rippleRef}/>
     </button>
   )
-}
-
-Button.defaultProps = {
-  disabled: false,
-  type: ButtonType.PRIMARY,
-  onClick: noop,
-  full: false
 }
 
 export default Button;

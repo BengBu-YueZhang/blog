@@ -5,7 +5,6 @@
   position: relative;
   user-select: none;
   outline: none;
-  background-color: var(--textTitle);
   border: none;
   height: 36px;
   min-width: 88px;
@@ -13,6 +12,18 @@
   border-radius: 2px;
   padding: 0 16px;
   cursor: pointer;
+
+  &-primary {
+    background-color: var(--textTitle);
+  }
+
+  &-default {
+    background-color: var(--bg);
+  }
+
+  &-danger {
+    background-color: var(--loadingBarErrorBg);
+  }
 
   &-full {
     width: 100%;
