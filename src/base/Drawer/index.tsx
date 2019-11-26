@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import './index.scss';
+import ReactDOM from 'react-dom';
 import Animate from '../Animate';
 import getZIndex from '../../util/zIndex';
 import classnames from 'classnames';
-import ReactDOM from 'react-dom';
+import './index.scss';
 
 const prefixClass = 'yy-drawer';
-
-const Animation = Animate.Animation
+const Animation = Animate.Animation;
+const maskTime = 200;
+const contentTime = 240;
 
 export interface IDrawe {
   mask?: boolean
@@ -19,7 +20,7 @@ export interface IDrawe {
   onClose?: () => void
   children?: React.ReactChild
   closable?: boolean
-  getContainer?: HTMLElement
+  getContainer?: HTMLElement | null
 }
 
 const Drawer: React.FC<IDrawe> = (props) => {
@@ -101,7 +102,7 @@ const Drawer: React.FC<IDrawe> = (props) => {
       setShow(false);
       setTimeout(() => {
         onClose && onClose();
-      }, 230);
+      }, contentTime);
     }
   }
 
@@ -109,14 +110,14 @@ const Drawer: React.FC<IDrawe> = (props) => {
     <div className={drawerClasses} style={{ zIndex }}>
       {
         mask && <Animation
-          duration={200}
+          duration={maskTime}
           animation={show}
         >
           <div className={`${prefixClass}-mask`} onClick={handleMaskClick}></div>
         </Animation>
       }
       <Animation
-        duration={230}
+        duration={contentTime}
         animation={show}
         to={drawerContentAnimationToStyle}
         from={drawerContentAnimationFromStyle}
@@ -136,7 +137,7 @@ const Drawer: React.FC<IDrawe> = (props) => {
 
   return ReactDOM.createPortal(
     node,
-    document.body
+    getContainer
   );
 }
 

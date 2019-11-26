@@ -1,0 +1,9 @@
+@import "../../style/var.scss";
+
+.#{$css-prefix}modal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}

@@ -4,12 +4,13 @@ import LoadingBar from '../../base/LoadingBar';
 import Button from '../../base/Button';
 import WithRipple from '../../base/WithRipple';
 import Drawer from '../../base/Drawer';
+import Modal from '../../base/Modal';
 
 const Home: React.FC = () => {
 
-  // const TestElement = WithRipple((
-  //   <div>123</div>
-  // ))
+  const TestElement = WithRipple((
+    <h1>标题</h1>
+  ))
   const [visible, setVisible] = useState(false)
 
   useLoadedEnd();
@@ -20,7 +21,8 @@ const Home: React.FC = () => {
         setVisible(true)
       }}>Click Drawer</button>
       <Drawer visible={visible}/>
-      {/* <button onClick={LoadingBar.start}>start</button>
+      <Modal/>
+      <button onClick={LoadingBar.start}>start</button>
       <button onClick={LoadingBar.finish}>success</button>
       <button onClick={LoadingBar.error}>error</button>
       <button onClick={LoadingBar.reset}>reset</button>
@@ -28,7 +30,7 @@ const Home: React.FC = () => {
       <Button>测试</Button>
       <hr/>
       <Button>测试测试测试测试测试测试</Button>
-      <TestElement/> */}
+      <TestElement/>
     </div>
   );
 }
